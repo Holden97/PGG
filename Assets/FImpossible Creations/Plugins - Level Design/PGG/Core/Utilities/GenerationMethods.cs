@@ -418,7 +418,7 @@ namespace FIMSpace.Generating
             if (runRules)
             {
                 #region Preparing grid 
-
+                //获取grid信息
                 var randCells = GetRandomizedCells(grid);
                 var randCells2 = GetRandomizedCells(grid);
 

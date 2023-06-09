@@ -23,6 +23,7 @@ namespace FIMSpace.Generating
         public Vector3Int helperCoords;
         /// <summary> Helper index to use with custom code </summary>
         public int HelperID;
+        public int brushSlotId;
 
         public Vector3 FlatV3Pos
         { get { return new Vector3(gridPosition.x, gridPosition.y, gridPosition.z); } }

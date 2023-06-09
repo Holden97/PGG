@@ -153,9 +153,9 @@ namespace FIMSpace.Generating
             return Vector3Int.zero;
         }
 
-        public T1 AddCell(Vector3Int position)
+        public T1 AddCell(Vector3Int position, int brushId = -1)
         {
-            return AddCell(position.x, position.y, position.z);
+            return AddCell(position.x, position.y, position.z, brushId);
         }
 
         public T1 AddCell(T1 oRef)
@@ -179,14 +179,16 @@ namespace FIMSpace.Generating
             return AddCell(position.x, yLevel, position.y);
         }
 
-        public T1 AddCell(int x, int y, int z)
+        public T1 AddCell(int x, int y, int z, int brushSlotId = -1)
         {
             T1 cell = GetCell(x, y, z, false);
 
             if (FGenerators.CheckIfIsNull((cell)) || cell.InTargetGridArea == false)
             {
                 cell = GetCell(x, y, z, true);
+                //标记已需要绘制网格
                 cell.InTargetGridArea = true;
+                cell.generateSlotId = brushSlotId;
                 cell.Scaler = ReferenceScale;
                 AllApprovedCells.Add(cell);
                 CheckForMinMax(cell);
@@ -233,7 +235,7 @@ namespace FIMSpace.Generating
                         /*if (cell == MinX)*/ // Search for current min
                         MinX = AnalyzeGridForMinX();
 
-                    if (MaxY == null ||  cell.Pos.y == MaxY.Pos.y) /*if (cell == MaxY)*/ MaxY = AnalyzeGridForMaxY();
+                    if (MaxY == null || cell.Pos.y == MaxY.Pos.y) /*if (cell == MaxY)*/ MaxY = AnalyzeGridForMaxY();
                     if (MinY == null || cell.Pos.y == MinY.Pos.y) /*if (cell == MinY)*/ MaxY = AnalyzeGridForMinY();
                     /*                 */
                     if (MaxZ == null || cell.Pos.z == MaxZ.Pos.z) /*if (cell == MaxZ)*/ MaxZ = AnalyzeGridForMaxZ();

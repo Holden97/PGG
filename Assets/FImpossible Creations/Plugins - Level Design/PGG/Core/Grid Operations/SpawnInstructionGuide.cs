@@ -16,6 +16,7 @@ namespace FIMSpace.Generating
         public int Id;
         public InstructionDefinition CustomDefinition;
         public bool UseDirection = false;
+        public int brushSlotId;
 
         internal SpawnInstruction GenerateGuide(FieldSetup preset, SpawnRestrictionsGroup group)
         {

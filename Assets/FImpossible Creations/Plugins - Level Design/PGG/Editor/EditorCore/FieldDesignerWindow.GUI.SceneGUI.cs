@@ -284,8 +284,8 @@ namespace FIMSpace.Generating
                                     if (ColorizePreview)
                                     {
                                         string displayS = "";
-                                        if (spawns.Count > 0) displayS = ((pos.x / cSize.x).ToString() + ", " + (pos.z / cSize.z).ToString()) + "\n" + ("Spawns: " + (spawns.Count).ToString()+"!");
-                                        else displayS = (pos.x / cSize.x).ToString() + ", " + (pos.z / cSize.z).ToString()+"!";
+                                        if (spawns.Count > 0) displayS = ((pos.x / cSize.x).ToString() + ", " + (pos.z / cSize.z).ToString()) + "\n" + ("Spawns: " + (spawns.Count).ToString() + "!");
+                                        else displayS = (pos.x / cSize.x).ToString() + ", " + (pos.z / cSize.z).ToString() + "!";
 
                                         // I have no idea why, but unity 2020 Handles.Label are positioned in some strange way
                                         Handles.Label(pos, displayS, centeredWhiteMiniLabel);

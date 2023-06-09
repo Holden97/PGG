@@ -801,7 +801,7 @@ MonoBehaviour:
   Enabled: 1
   Ignore: 0
   _editor_drawRule: 1
-  CellAllow: 1
+  CellAllow: 0
   AllConditionsMet: 1
   OffsetCellMode: 0
   OffsetCell: {x: 0, y: 0, z: 0}
@@ -1246,7 +1246,7 @@ MonoBehaviour:
   Enabled: 1
   Ignore: 0
   _editor_drawRule: 1
-  CellAllow: 1
+  CellAllow: 0
   AllConditionsMet: 1
   Propability: 0.389
   PropabilityMulVariable:
@@ -1497,7 +1497,7 @@ MonoBehaviour:
   Enabled: 1
   Ignore: 0
   _editor_drawRule: 1
-  CellAllow: 0
+  CellAllow: 1
   AllConditionsMet: 1
   Propability: 0.327
   PropabilityMulVariable:

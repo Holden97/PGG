@@ -13,6 +13,10 @@ namespace FIMSpace.Generating
         public Vector3Int Pos;
 
         public bool InTargetGridArea = false;
+        /// <summary>
+        /// 生成的笔刷id
+        /// </summary>
+        public int generateSlotId = -1;
         public int Scaler = 1;
 
         [System.NonSerialized] public Vector3 HelperVector = Vector3.zero;

@@ -15,7 +15,7 @@ namespace FIMSpace.Generating
         public static float TimeOfEnable = 0f;
         public static void RefreshPaintTimer() { TimeOfEnable = Time.realtimeSinceStartup; }
 
-        public static FieldCell ProcessInputEvents(ref bool paintNow, FGenGraph<FieldCell, FGenPoint> grid, FieldSetup preset, ref int yLevel, Transform root = null, bool modifyGrid = true, float cellWorldSize = 2, bool is2D = false)
+        public static FieldCell ProcessInputEvents(ref bool paintNow, FGenGraph<FieldCell, FGenPoint> grid, FieldSetup preset, ref int yLevel, Transform root = null, bool modifyGrid = true, float cellWorldSize = 2, bool is2D = false, int brushId = -1)
         {
             if (SceneView.lastActiveSceneView == null) return null;
             if (Selection.activeGameObject != null) if (Selection.activeGameObject.scene.rootCount == 1) return null;
@@ -71,10 +71,10 @@ namespace FIMSpace.Generating
                             Vector3? rootOff = null;
                             if (root != null)
                             {
-                                if ( is2D)
-                                rootOff = Vector3.forward * root.position.z;
+                                if (is2D)
+                                    rootOff = Vector3.forward * root.position.z;
                                 else
-                                rootOff = Vector3.up * root.position.y;
+                                    rootOff = Vector3.up * root.position.y;
                             }
 
                             if (e.type == EventType.MouseDown || e.type == EventType.MouseDrag)
@@ -82,8 +82,8 @@ namespace FIMSpace.Generating
                                 if (e.button < 2)
                                 {
                                     FieldCell c;
-                                    if (modifyGrid) c = PaintGrid(grid, preset, e, sceneCam, e.button == 1, root, yLevel, cellWorldSize, rootOff, is2D);
-                                    else c = PaintGrid(grid, preset, e, sceneCam, null, root, yLevel, cellWorldSize, rootOff, is2D);
+                                    if (modifyGrid) c = PaintGrid(grid, preset, e, sceneCam, e.button == 1, root, yLevel, cellWorldSize, rootOff, is2D, brushId);
+                                    else c = PaintGrid(grid, preset, e, sceneCam, null, root, yLevel, cellWorldSize, rootOff, is2D, brushId);
 
                                     ClearEvent(e, paintNow);
                                     return c;
@@ -93,8 +93,8 @@ namespace FIMSpace.Generating
                                 if (e.button < 1)
                                 {
                                     FieldCell c;
-                                    if (modifyGrid) c = PaintGrid(grid, preset, e, sceneCam, false, root, yLevel, cellWorldSize, rootOff, is2D);
-                                    else c = PaintGrid(grid, preset, e, sceneCam, null, root, yLevel, cellWorldSize, rootOff, is2D);
+                                    if (modifyGrid) c = PaintGrid(grid, preset, e, sceneCam, false, root, yLevel, cellWorldSize, rootOff, is2D, brushId);
+                                    else c = PaintGrid(grid, preset, e, sceneCam, null, root, yLevel, cellWorldSize, rootOff, is2D, brushId);
 
                                     ClearEvent(e, paintNow);
                                     return c;

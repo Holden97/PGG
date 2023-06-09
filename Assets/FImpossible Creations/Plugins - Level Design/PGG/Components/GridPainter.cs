@@ -210,6 +210,34 @@ namespace FIMSpace.Generating
             return generatingSetup;
         }
 
+        public FieldSetup GetTargetGeneratingSetup(int slotId)
+        {
+            if (_GenFSetupPreGathered) return generatingSetup;
+
+            generatingSetup = FieldPresets[slotId];
+
+            if (Composition != null)
+            {
+                if (Composition.OverrideEnabled && Composition.Prepared)
+                {
+                    generatingSetup = Composition.GetOverridedSetup();
+                }
+                else
+                {
+                    if (FieldPresets[slotId])
+                        generatingSetup = FieldPresets[slotId].Copy();
+                }
+            }
+            else
+            {
+                generatingSetup = FieldPresets[slotId].Copy();
+            }
+
+            _GenFSetupPreGathered = true;
+
+            return generatingSetup;
+        }
+
 
         public override void GenerateObjects()
         {
@@ -434,6 +462,8 @@ namespace FIMSpace.Generating
                         else
                         {
                             Gizmos.DrawWireCube(genPosition, new Vector3(cSize.x, cSize.y * 0.2f, cSize.z));
+                            Handles.Label(genPosition, $"({cell.Pos.x},{cell.Pos.z})");
+                            Handles.Label(genPosition - Vector3.right * 0.5f, $"笔刷槽位Id:({cell.generateSlotId-10000})");
                             if (cell.IsGhostCell) Gizmos.DrawCube(genPosition, new Vector3(cSize.x * 0.8f, cSize.y * 0.2f, cSize.z * 0.8f));
                         }
 
@@ -599,6 +629,7 @@ namespace FIMSpace.Generating
                 pCell.pos = cell.Pos;
                 pCell.rot = Quaternion.identity;
                 pCell.inGrid = cell.InTargetGridArea;
+                pCell.brushSlotId = cell.generateSlotId;
                 cell.GridPainter_AssignDataTo(ref pCell);
                 //pCell.Instructions = cell.GetInstructions();
                 cellsMemory.Add(pCell);
@@ -621,7 +652,7 @@ namespace FIMSpace.Generating
 
                 if (pCell.inGrid)
                 {
-                    var cell = grid.AddCell(pCell.pos.x, pCell.pos.y, pCell.pos.z);
+                    var cell = grid.AddCell(pCell.pos.x, pCell.pos.y, pCell.pos.z, pCell.brushSlotId);
                     cell.GridPainter_AssignDataFrom(pCell);
                     //cell.ReplaceInstructions(pCell.Instructions);
                     //grid.AllApprovedCells.Add(cell);
@@ -642,6 +673,10 @@ namespace FIMSpace.Generating
             public Quaternion rot;
             public bool inGrid;
             public bool isGhost;
+            /// <summary>
+            /// 生成的笔刷id
+            /// </summary>
+            public int brushSlotId;
 
             public List<InstructionDefinition> Instructions;
 
@@ -910,8 +945,8 @@ namespace FIMSpace.Generating
     [UnityEditor.CustomEditor(typeof(GridPainter))]
     public class InteriorPainterEditor : PGGGeneratorBaseEditor
     {
-        public GridPainter Get { get { if (_get == null) _get = (GridPainter)target; return _get; } }
-        private GridPainter _get;
+        public GridPainter Current { get { if (_currentPainter == null) _currentPainter = (GridPainter)target; return _currentPainter; } }
+        private GridPainter _currentPainter;
 
         SerializedProperty sp_Lists;
         SerializedObject basSerializedObject;
@@ -924,7 +959,7 @@ namespace FIMSpace.Generating
         {
             base.OnEnable();
 
-            if (Get.LoadCount > 1) Get.LoadCells();
+            if (Current.LoadCount > 1) Current.LoadCells();
 
             sp_Lists = serializedObject.FindProperty("AdditionalFieldSetups");
             _ignore.Add("AdditionalFieldSetups");
@@ -932,7 +967,7 @@ namespace FIMSpace.Generating
             _ignore.Add("CellsInstructions");
             _ignore.Add("AcquireCellDataFrom");
 
-            Get.CheckMemoryForDuplicates();
+            Current.CheckMemoryForDuplicates();
 
             basSerializedObject = serializedObject;
         }
@@ -941,14 +976,14 @@ namespace FIMSpace.Generating
         {
             base.DrawGUIBody();
 
-            FGUI_Inspector.LastGameObjectSelected = Get.gameObject;
+            FGUI_Inspector.LastGameObjectSelected = Current.gameObject;
 
             GUILayout.Space(4);
 
 
-            if (Get.Painting) GUI.backgroundColor = Color.green;
-            if (GUILayout.Button(Get.Painting ? "Stop Painting" : "Start Painting")) Get.Painting = !Get.Painting;
-            if (Get.Painting) GUI.backgroundColor = Color.white;
+            if (Current.Painting) GUI.backgroundColor = Color.green;
+            if (GUILayout.Button(Current.Painting ? "Stop Painting" : "Start Painting")) Current.Painting = !Current.Painting;
+            if (Current.Painting) GUI.backgroundColor = Color.white;
 
             //if (Get._Editor_ContinousMode) GUI.backgroundColor = Color.green;
             //if (GUILayout.Button(new GUIContent("Continous Mode (BETA)", "Continous generation mode: No re-generating all objects every refresh but generating/refreshing only new painted cells and nearest surroundings")))
@@ -961,8 +996,8 @@ namespace FIMSpace.Generating
             EditorGUILayout.BeginHorizontal();
             if (GUILayout.Button("Generate"))
             {
-                Get.LoadCells();
-                Get.GenerateObjects();
+                Current.LoadCells();
+                Current.GenerateObjects();
 
                 var sel = GetAllSelected();
                 for (int i = 0; i < sel.Count; i++)
@@ -972,9 +1007,9 @@ namespace FIMSpace.Generating
                 }
             }
 
-            if (Get.Generated != null) if (Get.Generated.Count > 0) if (GUILayout.Button("Clear Generated"))
+            if (Current.Generated != null) if (Current.Generated.Count > 0) if (GUILayout.Button("Clear Generated"))
                     {
-                        Get.ClearGenerated();
+                        Current.ClearGenerated();
 
                         var sel = GetAllSelected();
                         for (int i = 0; i < sel.Count; i++) sel[i].ClearGenerated();
@@ -984,18 +1019,18 @@ namespace FIMSpace.Generating
 
             GUILayout.Space(4);
 
-            FGUI_Inspector.FoldHeaderStart(ref Get._EditorGUI_DrawExtra, "More Options", FGUI_Resources.BGInBoxStyle);
+            FGUI_Inspector.FoldHeaderStart(ref Current._EditorGUI_DrawExtra, "More Options", FGUI_Resources.BGInBoxStyle);
 
-            if (Get._EditorGUI_DrawExtra)
+            if (Current._EditorGUI_DrawExtra)
             {
                 GUILayout.Space(3);
-                if (Get.Composition != null)
-                    if (Get.Composition.Setup != Get.FieldPreset)
+                if (Current.Composition != null)
+                    if (Current.Composition.Setup != Current.FieldPreset)
                     {
-                        Get.Composition.Setup = Get.FieldPreset;
+                        Current.Composition.Setup = Current.FieldPreset;
                     }
 
-                FieldSetupComposition.DrawCompositionGUI(Get, Get.Composition, true);
+                FieldSetupComposition.DrawCompositionGUI(Current, Current.Composition, true);
 
                 GUILayout.Space(3);
                 EditorGUILayout.LabelField("Features below may be replaced and contained by compositions in the future versions!", EditorStyles.centeredGreyMiniLabel);
@@ -1022,20 +1057,20 @@ namespace FIMSpace.Generating
                 EditorGUILayout.BeginVertical(FGUI_Resources.BGBoxStyle);
                 EditorGUILayout.LabelField("This two tabs will be removed in future versions", EditorStyles.centeredGreyMiniLabel);
 
-                if (Get.FieldPreset != null)
+                if (Current.FieldPreset != null)
                 {
 
 
                     GUILayout.Space(3);
-                    FGUI_Inspector.FoldSwitchableHeaderStart(ref Get._ModifyVars, ref Get._EditorGUI_DrawVars, "FieldSetup Variables values for generating", FGUI_Resources.BGInBoxStyle);
+                    FGUI_Inspector.FoldSwitchableHeaderStart(ref Current._ModifyVars, ref Current._EditorGUI_DrawVars, "FieldSetup Variables values for generating", FGUI_Resources.BGInBoxStyle);
                     GUILayout.Space(3);
 
-                    if (Get._EditorGUI_DrawVars && Get._ModifyVars)
+                    if (Current._EditorGUI_DrawVars && Current._ModifyVars)
                     {
-                        Get.RefreshFieldVariables();
-                        for (int i = 0; i < Get.SwitchVariables.Count; i++)
+                        Current.RefreshFieldVariables();
+                        for (int i = 0; i < Current.SwitchVariables.Count; i++)
                         {
-                            FieldVariable.Editor_DrawTweakableVariable(Get.SwitchVariables[i]);
+                            FieldVariable.Editor_DrawTweakableVariable(Current.SwitchVariables[i]);
                         }
                     }
 
@@ -1044,18 +1079,18 @@ namespace FIMSpace.Generating
 
 
 
-                    if (Get.SwitchPackVariables.Count > 0)
+                    if (Current.SwitchPackVariables.Count > 0)
                     {
                         GUILayout.Space(3);
-                        FGUI_Inspector.FoldSwitchableHeaderStart(ref Get._ModifyPackVars, ref Get._EditorGUI_DrawPackVars, "Mod Packs Variables values for generating", FGUI_Resources.BGInBoxStyle);
+                        FGUI_Inspector.FoldSwitchableHeaderStart(ref Current._ModifyPackVars, ref Current._EditorGUI_DrawPackVars, "Mod Packs Variables values for generating", FGUI_Resources.BGInBoxStyle);
                         GUILayout.Space(3);
 
-                        if (Get._EditorGUI_DrawPackVars && Get._ModifyPackVars)
+                        if (Current._EditorGUI_DrawPackVars && Current._ModifyPackVars)
                         {
-                            Get.RefreshFieldVariables();
-                            for (int i = 0; i < Get.SwitchPackVariables.Count; i++)
+                            Current.RefreshFieldVariables();
+                            for (int i = 0; i < Current.SwitchPackVariables.Count; i++)
                             {
-                                FieldVariable.Editor_DrawTweakableVariable(Get.SwitchPackVariables[i]);
+                                FieldVariable.Editor_DrawTweakableVariable(Current.SwitchPackVariables[i]);
                             }
                         }
 
@@ -1065,35 +1100,35 @@ namespace FIMSpace.Generating
 
 
                     GUILayout.Space(3);
-                    FGUI_Inspector.FoldHeaderStart(ref Get._EditorGUI_DrawIgnoring, "Select Ignored Modificators", FGUI_Resources.BGInBoxStyle);
+                    FGUI_Inspector.FoldHeaderStart(ref Current._EditorGUI_DrawIgnoring, "Select Ignored Modificators", FGUI_Resources.BGInBoxStyle);
                     GUILayout.Space(3);
 
-                    if (Get._EditorGUI_DrawIgnoring)
+                    if (Current._EditorGUI_DrawIgnoring)
                     {
 
-                        if (Get.FieldPreset.ModificatorPacks.Count > 0)
+                        if (Current.FieldPreset.ModificatorPacks.Count > 0)
                         {
                             EditorGUILayout.BeginHorizontal();
 
-                            if (GUILayout.Button(" < ", GUILayout.Width(40))) Get._EditorGUI_SelectedId--;
+                            if (GUILayout.Button(" < ", GUILayout.Width(40))) Current._EditorGUI_SelectedId--;
 
-                            EditorGUILayout.LabelField((Get._EditorGUI_SelectedId + 1) + " / " + Get.FieldPreset.ModificatorPacks.Count, EditorStyles.centeredGreyMiniLabel);
+                            EditorGUILayout.LabelField((Current._EditorGUI_SelectedId + 1) + " / " + Current.FieldPreset.ModificatorPacks.Count, EditorStyles.centeredGreyMiniLabel);
 
-                            if (GUILayout.Button(" > ", GUILayout.Width(40))) Get._EditorGUI_SelectedId++;
+                            if (GUILayout.Button(" > ", GUILayout.Width(40))) Current._EditorGUI_SelectedId++;
 
-                            if (Get._EditorGUI_SelectedId >= Get.FieldPreset.ModificatorPacks.Count) Get._EditorGUI_SelectedId = 0;
-                            if (Get._EditorGUI_SelectedId < 0) Get._EditorGUI_SelectedId = Get.FieldPreset.ModificatorPacks.Count - 1;
+                            if (Current._EditorGUI_SelectedId >= Current.FieldPreset.ModificatorPacks.Count) Current._EditorGUI_SelectedId = 0;
+                            if (Current._EditorGUI_SelectedId < 0) Current._EditorGUI_SelectedId = Current.FieldPreset.ModificatorPacks.Count - 1;
 
                             EditorGUILayout.EndHorizontal();
 
-                            if (Get._EditorGUI_SelectedId == -1)
-                                DrawIgnoresList(Get.FieldPreset.RootPack);
+                            if (Current._EditorGUI_SelectedId == -1)
+                                DrawIgnoresList(Current.FieldPreset.RootPack);
                             else
-                                DrawIgnoresList(Get.FieldPreset.ModificatorPacks[Get._EditorGUI_SelectedId]);
+                                DrawIgnoresList(Current.FieldPreset.ModificatorPacks[Current._EditorGUI_SelectedId]);
                         }
                         else
                         {
-                            DrawIgnoresList(Get.FieldPreset.RootPack);
+                            DrawIgnoresList(Current.FieldPreset.RootPack);
                         }
 
                     }
@@ -1122,7 +1157,7 @@ namespace FIMSpace.Generating
             for (int i = 0; i < Selection.gameObjects.Length; i++)
             {
                 GridPainter p = Selection.gameObjects[i].GetComponent<GridPainter>();
-                if (p != Get) if (p) sel.Add(p);
+                if (p != Current) if (p) sel.Add(p);
             }
 
             return sel;
@@ -1135,7 +1170,7 @@ namespace FIMSpace.Generating
             EditorGUILayout.BeginVertical();
             EditorGUILayout.BeginHorizontal();
 
-            bool pselected = !Get.ignoredPacksForGenerating.Contains(pack);
+            bool pselected = !Current.ignoredPacksForGenerating.Contains(pack);
             bool pre = pselected;
             pselected = EditorGUILayout.Toggle(pselected, GUILayout.Width(18));
             EditorGUILayout.LabelField(pack.name + " Mods Pack", FGUI_Resources.HeaderStyle);
@@ -1144,15 +1179,15 @@ namespace FIMSpace.Generating
             {
                 if (pselected == false)
                 {
-                    Get.ignoredPacksForGenerating.Add(pack);
+                    Current.ignoredPacksForGenerating.Add(pack);
                     serializedObject.Update();
-                    EditorUtility.SetDirty(Get);
+                    EditorUtility.SetDirty(Current);
                 }
                 else
                 {
-                    Get.ignoredPacksForGenerating.Remove(pack);
+                    Current.ignoredPacksForGenerating.Remove(pack);
                     serializedObject.Update();
-                    EditorUtility.SetDirty(Get);
+                    EditorUtility.SetDirty(Current);
                 }
             }
 
@@ -1169,7 +1204,7 @@ namespace FIMSpace.Generating
                 var mod = pack.FieldModificators[i];
                 EditorGUILayout.BeginHorizontal();
 
-                bool selected = !Get.ignoredForGenerating.Contains(mod);
+                bool selected = !Current.ignoredForGenerating.Contains(mod);
                 pre = selected;
 
                 selected = EditorGUILayout.Toggle(selected, GUILayout.Width(18));
@@ -1182,15 +1217,15 @@ namespace FIMSpace.Generating
                 {
                     if (selected == false)
                     {
-                        Get.ignoredForGenerating.Add(mod);
+                        Current.ignoredForGenerating.Add(mod);
                         serializedObject.Update();
-                        EditorUtility.SetDirty(Get);
+                        EditorUtility.SetDirty(Current);
                     }
                     else
                     {
-                        Get.ignoredForGenerating.Remove(mod);
+                        Current.ignoredForGenerating.Remove(mod);
                         serializedObject.Update();
-                        EditorUtility.SetDirty(Get);
+                        EditorUtility.SetDirty(Current);
                     }
                 }
 
@@ -1199,15 +1234,15 @@ namespace FIMSpace.Generating
 
             EditorGUILayout.EndVertical();
 
-            if (Get.ignoredForGenerating.Count > 0)
+            if (Current.ignoredForGenerating.Count > 0)
             {
                 GUILayout.Space(4);
 
                 if (GUILayout.Button("Clear All Ignores"))
                 {
-                    Get.ignoredForGenerating.Clear();
+                    Current.ignoredForGenerating.Clear();
                     serializedObject.Update();
-                    EditorUtility.SetDirty(Get);
+                    EditorUtility.SetDirty(Current);
                 }
             }
 
@@ -1227,53 +1262,53 @@ namespace FIMSpace.Generating
         {
             if (SceneView.currentDrawingSceneView == null) return;
             if (SceneView.currentDrawingSceneView.camera == null) return;
-            if (Selection.activeGameObject != Get.gameObject) return;
-            if (Get.FieldPreset == null) return;
+            if (Selection.activeGameObject != Current.gameObject) return;
+            if (Current.FieldPreset == null) return;
 
-            Undo.RecordObject(Get, "PGGGridP");
+            Undo.RecordObject(Current, "PGGGridP");
 
-            Vector3 cSize = Get.FieldPreset.GetCellUnitSize();
+            Vector3 cSize = Current.FieldPreset.GetCellUnitSize();
             Color preH = Handles.color;
 
-            if (Get.Grid != null)
+            if (Current.Grid != null)
 
-                if (Get._Editor_Paint == false)
-                    if (Get.GetAllPainterCells.Count > 0)
+                if (Current._Editor_Paint == false)
+                    if (Current.GetAllPainterCells.Count > 0)
                     {
                         Handles.color = new Color(0.2f, 1f, 0.2f, 0.8f);
                         //Handles.color = Color.red;
 
-                        for (int i = Get.CellsInstructions.Count - 1; i >= 0; i--)
+                        for (int i = Current.CellsInstructions.Count - 1; i >= 0; i--)
                         {
-                            if (Get.CellsInstructions[i] == null)
+                            if (Current.CellsInstructions[i] == null)
                             {
-                                Get.CellsInstructions.RemoveAt(i);
+                                Current.CellsInstructions.RemoveAt(i);
                                 continue;
                             }
 
-                            var instr = Get.CellsInstructions[i];
+                            var instr = Current.CellsInstructions[i];
                             float size = cSize.x;
-                            Vector3 genPosition = Get.transform.TransformPoint(Get.FieldPreset.TransformCellPosition((Vector3)instr.pos));
+                            Vector3 genPosition = Current.transform.TransformPoint(Current.FieldPreset.TransformCellPosition((Vector3)instr.pos));
                             //Vector3 genPosition = Get.transform.TransformPoint((Vector3)instr.pos * size);
 
                             if (Handles.Button(genPosition, Quaternion.identity, size * 0.2f, size * 0.2f, Handles.SphereHandleCap))
                             {
-                                if (Get.Selected == instr) Get.Selected = null; else Get.Selected = instr;
+                                if (Current.Selected == instr) Current.Selected = null; else Current.Selected = instr;
                             }
 
-                            if (Get.Selected == instr)
+                            if (Current.Selected == instr)
                             {
-                                if (DrawButton(EditorGUIUtility.IconContent(Get._Editor_RotOrMovTool ? "MoveTool" : "RotateTool"), genPosition - Get.transform.forward * size * 0.4f - Get.transform.right * size * 0.4f, size * 0.9f))
+                                if (DrawButton(EditorGUIUtility.IconContent(Current._Editor_RotOrMovTool ? "MoveTool" : "RotateTool"), genPosition - Current.transform.forward * size * 0.4f - Current.transform.right * size * 0.4f, size * 0.9f))
                                 {
-                                    Get._Editor_RotOrMovTool = !Get._Editor_RotOrMovTool;
+                                    Current._Editor_RotOrMovTool = !Current._Editor_RotOrMovTool;
                                 }
 
-                                if (Get._Editor_RotOrMovTool)
+                                if (Current._Editor_RotOrMovTool)
                                 {
-                                    Handles.Label(genPosition - Get.transform.forward * size * 0.44f - Get.transform.right * size * 0.57f, new GUIContent(FGUI_Resources.Tex_Info, "Switch back to cell rotation tool if you want to use directional mode. If you leave this guide in movement mode then rotation will not be used!"));
+                                    Handles.Label(genPosition - Current.transform.forward * size * 0.44f - Current.transform.right * size * 0.57f, new GUIContent(FGUI_Resources.Tex_Info, "Switch back to cell rotation tool if you want to use directional mode. If you leave this guide in movement mode then rotation will not be used!"));
                                 }
 
-                                instr.UseDirection = !Get._Editor_RotOrMovTool;
+                                instr.UseDirection = !Current._Editor_RotOrMovTool;
 
                                 //if (Get.CellsInstructions.Count > 1)
                                 //{
@@ -1284,31 +1319,31 @@ namespace FIMSpace.Generating
                                 //    if (instr.Id > Get.CellsInstructions.Count - 1) instr.Id = 0;
                                 //}
 
-                                if (Get._Editor_RotOrMovTool == false)
+                                if (Current._Editor_RotOrMovTool == false)
                                 {
-                                    Get.Selected.rot = FEditor_TransformHandles.RotationHandle(Get.Selected.rot, genPosition, size * 0.75f);
-                                    Get.Selected.rot = FVectorMethods.FlattenRotation(Get.Selected.rot, 45f);
+                                    Current.Selected.rot = FEditor_TransformHandles.RotationHandle(Current.Selected.rot, genPosition, size * 0.75f);
+                                    Current.Selected.rot = FVectorMethods.FlattenRotation(Current.Selected.rot, 45f);
                                 }
                                 else
                                 {
-                                    Get.Selected.pos = PGGUtils.V3toV3Int(Get.transform.InverseTransformPoint(FEditor_TransformHandles.PositionHandle(genPosition, Get.transform.rotation * instr.rot, size * 0.75f)) / size);
+                                    Current.Selected.pos = PGGUtils.V3toV3Int(Current.transform.InverseTransformPoint(FEditor_TransformHandles.PositionHandle(genPosition, Current.transform.rotation * instr.rot, size * 0.75f)) / size);
                                     //Get.Selected.pos = FVectorMethods.FlattenVector(Get.Selected.pos, Get.RoomPreset.CellSize);
                                 }
 
                                 Quaternion r;
                                 if (instr.WorldRot)
-                                    r = Get.Selected.rot;
+                                    r = Current.Selected.rot;
                                 else
-                                    r = Get.transform.rotation * Get.Selected.rot;
+                                    r = Current.transform.rotation * Current.Selected.rot;
 
                                 FGUI_Handles.DrawArrow(genPosition, Quaternion.Euler(r.eulerAngles), 0.5f, 0f, 1f);
 
                                 if (instr != null)
                                 {
                                     if (instr.CustomDefinition.InstructionType != InstructionDefinition.EInstruction.None)
-                                        Handles.Label(genPosition + Get.transform.forward * size * 0.3f, new GUIContent(instr.CustomDefinition.Title));
+                                        Handles.Label(genPosition + Current.transform.forward * size * 0.3f, new GUIContent(instr.CustomDefinition.Title));
                                     else
-                                        Handles.Label(genPosition + Get.transform.forward * size * 0.3f, new GUIContent(Get.FieldPreset.CellsInstructions[instr.Id].Title));
+                                        Handles.Label(genPosition + Current.transform.forward * size * 0.3f, new GUIContent(Current.FieldPreset.CellsInstructions[instr.Id].Title));
                                 }
                             }
                         }
@@ -1322,36 +1357,36 @@ namespace FIMSpace.Generating
             float dpiH = FGenerators.EditorUIScale;
             int hOffset = (int)(Screen.height / dpiH);
 
-            GridVisualize.DrawPaintGUI(ref Get._Editor_Paint, hOffset);
+            GridVisualize.DrawPaintGUI(ref Current._Editor_Paint, hOffset);
 
-            if (Get._Editor_Paint)
+            if (Current._Editor_Paint)
             {
                 //if (Get._Editor_PaintSpaceMode == GridPainter.EPaintSpaceMode.XZ)
                 {
                     Rect radRect = new Rect(15, hOffset - 140, 140, 20);
-                    Get._Editor_PaintRadius = Mathf.RoundToInt(GUI.HorizontalSlider(radRect, Get._Editor_PaintRadius, 1, 4));
+                    Current._Editor_PaintRadius = Mathf.RoundToInt(GUI.HorizontalSlider(radRect, Current._Editor_PaintRadius, 1, 4));
                     radRect = new Rect(radRect);
                     radRect.y -= 18;
                     GUI.Label(radRect, new GUIContent("Radius"));
 
                     radRect = new Rect(15, hOffset - 179, 140, 20);
-                    Get._Editor_RadiusY = Mathf.RoundToInt(GUI.HorizontalSlider(radRect, Get._Editor_RadiusY, 1, 4));
+                    Current._Editor_RadiusY = Mathf.RoundToInt(GUI.HorizontalSlider(radRect, Current._Editor_RadiusY, 1, 4));
                     radRect = new Rect(radRect);
                     radRect.y -= 18;
                     GUI.Label(radRect, new GUIContent("Radius Y"));
                 }
 
                 Rect refreshRect = new Rect(160, hOffset - 75, 120, 20);
-                Get.AutoRefresh = GUI.Toggle(refreshRect, Get.AutoRefresh, "Auto Refresh");
+                Current.AutoRefresh = GUI.Toggle(refreshRect, Current.AutoRefresh, "Auto Refresh");
 
-                if (!Get.AutoRefresh)
+                if (!Current.AutoRefresh)
                 {
                     refreshRect.position += new Vector2(116, 0);
 
                     if (GUI.Button(refreshRect, "Generate"))
                     {
-                        Get.LoadCells();
-                        Get.GenerateObjects();
+                        Current.LoadCells();
+                        Current.GenerateObjects();
 
                         var sel = GetAllSelected();
                         for (int i = 0; i < sel.Count; i++)
@@ -1367,9 +1402,9 @@ namespace FIMSpace.Generating
                 Rect refreshRect = new Rect(160, hOffset - 75, 120, 20);
                 if (GUI.Button(refreshRect, "Generate"))
                 {
-                    Get.LoadCells();
+                    Current.LoadCells();
                     //Get.ClearGenerated();
-                    Get.GenerateObjects();
+                    Current.GenerateObjects();
 
                     var sel = GetAllSelected();
                     for (int i = 0; i < sel.Count; i++)
@@ -1388,40 +1423,40 @@ namespace FIMSpace.Generating
             int y = (int)(22 * dpiH);
             bRect = new Rect(x, y, 160, 40);
 
-            string focusTxt = Get._Editor_PaintSpaceMode == GridPainter.EPaintSpaceMode.XZ ? "Focus On Y Level: " : "Focus On Z Depth: ";
+            string focusTxt = Current._Editor_PaintSpaceMode == GridPainter.EPaintSpaceMode.XZ ? "Focus On Y Level: " : "Focus On Z Depth: ";
 
-            GUI.Label(bRect, focusTxt + Get._Editor_YLevel, FGUI_Resources.HeaderStyle);
+            GUI.Label(bRect, focusTxt + Current._Editor_YLevel, FGUI_Resources.HeaderStyle);
             bRect = new Rect(x + 150, y, 20, 20);
-            if (GUI.Button(bRect, "▲")) Get._Editor_YLevel++;
+            if (GUI.Button(bRect, "▲")) Current._Editor_YLevel++;
 
 
-            if (Get._Editor_Paint)
+            if (Current._Editor_Paint)
             {
                 bRect = new Rect(x + 185, y, 55, 20);
                 GUI.Label(bRect, "shift + A", FGUI_Resources.HeaderStyle);
             }
 
             bRect = new Rect(x + 150, y + 22 * dpiH, 20, 20);
-            if (GUI.Button(bRect, "▼")) Get._Editor_YLevel--;
+            if (GUI.Button(bRect, "▼")) Current._Editor_YLevel--;
 
-            if (Get._Editor_Paint)
+            if (Current._Editor_Paint)
             {
                 bRect = new Rect(x + 185, y + 21 * dpiH, 55, 20);
                 GUI.Label(bRect, "shift + Z", FGUI_Resources.HeaderStyle);
             }
 
             bRect = new Rect(x + 20 * dpiH, y + 31 * dpiH, 120, 20);
-            bool is2D = Get._Editor_PaintSpaceMode == GridPainter.EPaintSpaceMode.XY_2D;
+            bool is2D = Current._Editor_PaintSpaceMode == GridPainter.EPaintSpaceMode.XY_2D;
             is2D = GUI.Toggle(bRect, is2D, " Paint 2D");
-            Get._Editor_PaintSpaceMode = is2D ? GridPainter.EPaintSpaceMode.XY_2D : GridPainter.EPaintSpaceMode.XZ;
+            Current._Editor_PaintSpaceMode = is2D ? GridPainter.EPaintSpaceMode.XY_2D : GridPainter.EPaintSpaceMode.XZ;
 
             //bRect = new Rect(x + 200, y - 7 * dpiH, 300, 100);
             //GUI.Label(bRect, "If you don't see 'Paint' button on the bottom of\nscene view then you must change dpi settings\nof unity editor and restart it.");
 
 
-            if (string.IsNullOrEmpty(Get.FieldPreset.InfoText) == false)
+            if (string.IsNullOrEmpty(Current.FieldPreset.InfoText) == false)
             {
-                GUIContent cont = new GUIContent("Info:\n" + Get.FieldPreset.InfoText);
+                GUIContent cont = new GUIContent("Info:\n" + Current.FieldPreset.InfoText);
                 Vector2 sz = EditorStyles.label.CalcSize(cont); sz = new Vector2(sz.x * 1.04f + 8, sz.y * 1.1f);
                 bRect = new Rect((Screen.width / dpiH) - sz.x, hOffset - 45 * dpiH - sz.y, sz.x, sz.y);
                 GUI.Label(bRect, cont);
@@ -1432,26 +1467,27 @@ namespace FIMSpace.Generating
             Handles.EndGUI();
 
             //if (Get.Painting)
-            if (Get.FieldPreset != null)
+            if (Current.FieldPreset != null)
                 if (Event.current.type == EventType.MouseMove)
                     SceneView.RepaintAll();
 
             int eButton = Event.current.button;
 
-            if (Get.PaintingID <= -1)
+            if (Current.PaintingID <= -1 || Current.PaintingID >= 10000)
             {
-                var cell = GridVisualize.ProcessInputEvents(ref Get._Editor_Paint, Get.grid, Get.FieldPreset, ref Get._Editor_YLevel, Get.transform, true, cSize.y, is2D);
+                //标记已需要绘制网格
+                var cell = GridVisualize.ProcessInputEvents(ref Current._Editor_Paint, Current.grid, Current.FieldPreset, ref Current._Editor_YLevel, Current.transform, true, cSize.y, is2D, Current.PaintingID);
 
                 if (cell != null)
                 {
-                    if (Get._Editor_PaintRadius > 1 || Get._Editor_RadiusY > 1)
+                    if (Current._Editor_PaintRadius > 1 || Current._Editor_RadiusY > 1)
                     {
-                        int rad = Mathf.RoundToInt((float)Get._Editor_PaintRadius * 0.7f);
+                        int rad = Mathf.RoundToInt((float)Current._Editor_PaintRadius * 0.7f);
 
                         if (!is2D)
                         {
                             for (int rx = -rad; rx < rad; rx++)
-                                for (int ry = 0; ry < Get._Editor_RadiusY; ry++)
+                                for (int ry = 0; ry < Current._Editor_RadiusY; ry++)
                                     for (int rz = -rad; rz < rad; rz++)
                                     {
                                         if (rx == 0 && ry == 0 && rz == 0) continue;
@@ -1459,12 +1495,12 @@ namespace FIMSpace.Generating
 
                                         if (cell.InTargetGridArea)
                                         {
-                                            Get.grid.AddCell(radPos);
-                                            cell.IsGhostCell = Get.PaintingID == -2;
+                                            Current.grid.AddCell(radPos);
+                                            cell.IsGhostCell = Current.PaintingID == -2;
                                         }
                                         else
                                         {
-                                            Get.grid.RemoveCell(radPos);
+                                            Current.grid.RemoveCell(radPos);
                                             cell.IsGhostCell = false;
                                         }
                                     }
@@ -1473,19 +1509,19 @@ namespace FIMSpace.Generating
                         {
                             for (int rx = -rad; rx < rad; rx++)
                                 for (int ry = -rad; ry < rad; ry++)
-                                    for (int rz = 0; rz < Get._Editor_RadiusY; rz++)
+                                    for (int rz = 0; rz < Current._Editor_RadiusY; rz++)
                                     {
                                         if (rx == 0 && ry == 0 && rz == 0) continue;
                                         Vector3Int radPos = cell.Pos + new Vector3Int(rx, ry, rz);
 
                                         if (cell.InTargetGridArea)
                                         {
-                                            Get.grid.AddCell(radPos);
-                                            cell.IsGhostCell = Get.PaintingID == -2;
+                                            Current.grid.AddCell(radPos);
+                                            cell.IsGhostCell = Current.PaintingID == -2;
                                         }
                                         else
                                         {
-                                            Get.grid.RemoveCell(radPos);
+                                            Current.grid.RemoveCell(radPos);
                                             cell.IsGhostCell = false;
                                         }
                                     }
@@ -1495,10 +1531,10 @@ namespace FIMSpace.Generating
                     }
                     else
                     {
-                        if (FGenerators.CheckIfExist_NOTNULL(cell)) cell.IsGhostCell = Get.PaintingID == -2;
+                        if (FGenerators.CheckIfExist_NOTNULL(cell)) cell.IsGhostCell = Current.PaintingID == -2;
                     }
 
-                    Get.OnChange();
+                    Current.OnChange();
                 }
             }
             else
@@ -1509,20 +1545,20 @@ namespace FIMSpace.Generating
                 var e = Event.current;
                 if (e != null) if (e.isMouse) if (e.type == EventType.MouseDown || e.type == EventType.MouseDrag) if (Event.current.button == 1) rem = true;
 
-                var cell = GridVisualize.ProcessInputEvents(ref Get._Editor_Paint, Get.grid, Get.FieldPreset, ref Get._Editor_YLevel, Get.transform, false, cSize.y, is2D);
+                var cell = GridVisualize.ProcessInputEvents(ref Current._Editor_Paint, Current.grid, Current.FieldPreset, ref Current._Editor_YLevel, Current.transform, false, cSize.y, is2D, Current.PaintingID);
 
                 if (cell != null)
                 {
                     int already = -1;
-                    for (int i = 0; i < Get.CellsInstructions.Count; i++)
+                    for (int i = 0; i < Current.CellsInstructions.Count; i++)
                     {
-                        if (Get.CellsInstructions[i] == null) continue;
-                        if (Get.CellsInstructions[i].pos == cell.Pos)
+                        if (Current.CellsInstructions[i] == null) continue;
+                        if (Current.CellsInstructions[i].pos == cell.Pos)
                         {
                             already = i;
-                            if (Get.AllowOverlapInstructions)
+                            if (Current.AllowOverlapInstructions)
                             {
-                                if (Get.CellsInstructions[i].Id == Get.PaintingID)
+                                if (Current.CellsInstructions[i].Id == Current.PaintingID)
                                 {
                                     break;
                                 }
@@ -1541,10 +1577,10 @@ namespace FIMSpace.Generating
                         {
                             SpawnInstructionGuide instr = new SpawnInstructionGuide();
                             instr.pos = cell.Pos;
-                            instr.Id = Get.PaintingID;
+                            instr.Id = Current.PaintingID;
 
-                            Get.CellsInstructions.Add(instr);
-                            if (Get.AddCellsOnInstructions) Get.grid.AddCell(cell.Pos);
+                            Current.CellsInstructions.Add(instr);
+                            if (Current.AddCellsOnInstructions) Current.grid.AddCell(cell.Pos);
 
                             change = true;
                             basSerializedObject.Update();
@@ -1554,13 +1590,13 @@ namespace FIMSpace.Generating
                     {
                         if (rem)
                         {
-                            Get.CellsInstructions.RemoveAt(already);
+                            Current.CellsInstructions.RemoveAt(already);
                             change = true;
                             basSerializedObject.Update();
                         }
                     }
 
-                    if (change) Get.OnChange();
+                    if (change) Current.OnChange();
                 }
             }
 
@@ -1568,24 +1604,24 @@ namespace FIMSpace.Generating
 
         public void DrawCellTools()
         {
-            if (Get.FieldPreset == null) return;
+            if (Current.FieldPreset == null) return;
 
             Rect bRect = new Rect(15, 15, 132, 24);
             Color preC = GUI.backgroundColor;
 
-            if (Get.PaintingID == -1) GUI.backgroundColor = Color.green;
+            if (Current.PaintingID == -1) GUI.backgroundColor = Color.green;
             if (GUI.Button(bRect, "Paint Cells "))
             {
-                Get.PaintingID = -1;
+                Current.PaintingID = -1;
             }
 
             bRect.position += new Vector2(0, bRect.size.y + 2);
-            for (int i = 0; i < Get.FieldPresets.Count; i++)
+            for (int i = 0; i < Current.FieldPresets.Count; i++)
             {
                 bRect.position += new Vector2(0, bRect.size.y + 2);
-                if (GUI.Button(bRect, $"{Get.FieldPresets[i].name}"))
+                if (GUI.Button(bRect, $"{Current.FieldPresets[i].name}"))
                 {
-                    Get.PaintingID = -1;
+                    Current.PaintingID = 10000 + i;
                 }
             }
 
@@ -1594,13 +1630,13 @@ namespace FIMSpace.Generating
             //gRect.size = new Vector2(90, 24);
             GUI.backgroundColor = preC;
 
-            if (Get.PaintingID == -2) GUI.backgroundColor = Color.green;
-            if (GUI.Button(bRect, "Ghost Cell")) Get.PaintingID = -2;
+            if (Current.PaintingID == -2) GUI.backgroundColor = Color.green;
+            if (GUI.Button(bRect, "Ghost Cell")) Current.PaintingID = -2;
             GUI.backgroundColor = preC;
 
 
             int commandsPerPage = 7;
-            int totalPages = ((Get.FieldPreset.CellsInstructions.Count + (commandsPerPage - 1)) / commandsPerPage);
+            int totalPages = ((Current.FieldPreset.CellsInstructions.Count + (commandsPerPage - 1)) / commandsPerPage);
 
             bRect.y += 10;
 
@@ -1608,11 +1644,11 @@ namespace FIMSpace.Generating
             {
                 float yy = bRect.y + FGenerators.EditorUIScale * 24;
                 Rect btRect = new Rect(bRect.x, yy, 20, 18);
-                if (GUI.Button(btRect, "<")) { Get._Editor_CommandsPage -= 1; if (Get._Editor_CommandsPage < 0) Get._Editor_CommandsPage = totalPages - 1; }
+                if (GUI.Button(btRect, "<")) { Current._Editor_CommandsPage -= 1; if (Current._Editor_CommandsPage < 0) Current._Editor_CommandsPage = totalPages - 1; }
                 btRect = new Rect(bRect.x + 24, yy, 86, 18);
-                GUI.Label(btRect, (Get._Editor_CommandsPage + 1) + " / " + totalPages, FGUI_Resources.HeaderStyle);
+                GUI.Label(btRect, (Current._Editor_CommandsPage + 1) + " / " + totalPages, FGUI_Resources.HeaderStyle);
                 btRect = new Rect(bRect.x + 100, yy, 20, 18);
-                if (GUI.Button(btRect, ">")) { Get._Editor_CommandsPage += 1; if (Get._Editor_CommandsPage >= totalPages) Get._Editor_CommandsPage = 0; }
+                if (GUI.Button(btRect, ">")) { Current._Editor_CommandsPage += 1; if (Current._Editor_CommandsPage >= totalPages) Current._Editor_CommandsPage = 0; }
                 bRect.y += 20;
             }
 
@@ -1621,21 +1657,21 @@ namespace FIMSpace.Generating
             bRect.width += 6;
             float padding = 23 * FGenerators.EditorUIScale;
 
-            if (Get._Editor_CommandsPage >= totalPages) Get._Editor_CommandsPage = 0;
-            int startI = Get._Editor_CommandsPage * commandsPerPage;
+            if (Current._Editor_CommandsPage >= totalPages) Current._Editor_CommandsPage = 0;
+            int startI = Current._Editor_CommandsPage * commandsPerPage;
 
             for (int i = startI; i < startI + commandsPerPage; i++)
             {
-                if (i >= Get.FieldPreset.CellsInstructions.Count) break;
+                if (i >= Current.FieldPreset.CellsInstructions.Count) break;
 
                 bRect.y += padding;
-                if (Get.PaintingID == i) GUI.backgroundColor = Color.green;
+                if (Current.PaintingID == i) GUI.backgroundColor = Color.green;
 
-                if (FGenerators.CheckIfExist_NOTNULL(Get.FieldPreset.CellsInstructions[i]))
-                    if (GUI.Button(bRect, Get.FieldPreset.CellsInstructions[i].Title))
-                        Get.PaintingID = i;
+                if (FGenerators.CheckIfExist_NOTNULL(Current.FieldPreset.CellsInstructions[i]))
+                    if (GUI.Button(bRect, Current.FieldPreset.CellsInstructions[i].Title))
+                        Current.PaintingID = i;
 
-                if (Get.PaintingID == i) GUI.backgroundColor = preC;
+                if (Current.PaintingID == i) GUI.backgroundColor = preC;
             }
 
             //for (int i = 0; i < Get.FieldPreset.CellsInstructions.Count; i++)

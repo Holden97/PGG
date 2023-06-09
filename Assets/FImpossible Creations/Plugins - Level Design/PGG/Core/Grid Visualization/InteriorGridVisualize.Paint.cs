@@ -53,7 +53,7 @@ namespace FIMSpace.Generating
             return camRay.GetPoint(dist);
         }
 
-        public static FieldCell PaintGrid(FGenGraph<FieldCell, FGenPoint> grid, FieldSetup preset, Event e, Camera sceneCam, bool? erase, Transform root, int yLevel, float cellWorldSize, Vector3? posOff = null, bool is2D = false)
+        public static FieldCell PaintGrid(FGenGraph<FieldCell, FGenPoint> grid, FieldSetup preset, Event e, Camera sceneCam, bool? erase, Transform root, int yLevel, float cellWorldSize, Vector3? posOff = null, bool is2D = false, int brushId = -1)
         {
             Vector3 clickPos;
 
@@ -95,7 +95,7 @@ namespace FIMSpace.Generating
             else
             if (erase == false)
             {
-                return grid.AddCell(gridPos);
+                return grid.AddCell(gridPos,brushId);
             }
             else
             {

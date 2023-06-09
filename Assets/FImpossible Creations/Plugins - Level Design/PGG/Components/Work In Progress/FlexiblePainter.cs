@@ -650,7 +650,7 @@ namespace FIMSpace.Generating
             if (eButton < 2)
                 if (Get.PaintingID == -1) // Painting simple grid cells
                 {
-                    var cell = GridVisualize.ProcessInputEvents(ref Get._Editor_Paint, grid, Get.FieldSetup, ref Get._Editor_YLevel, Get.transform, false, cSize.y, is2D);
+                    var cell = GridVisualize.ProcessInputEvents(ref Get._Editor_Paint, grid, Get.FieldSetup, ref Get._Editor_YLevel, Get.transform, false, cSize.y, is2D, Get.PaintingID);
 
                     if (cell != null)
                     {
