@@ -1,0 +1,732 @@
+Using pre-set license
+Built from '2021.3/china_unity/release' branch; Version is '2021.3.18f1c1 (93698379025b) revision 9660803'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 11  (10.0.22621) 64bit CoreCountrySpecific' Language: 'zh' Physical Memory: 16091 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2021.3.18f1c1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker1
+-projectPath
+D:/GitRepo/PGG
+-logFile
+Logs/AssetImportWorker1.log
+-srvPort
+51034
+Successfully changed project path to: D:/GitRepo/PGG
+D:/GitRepo/PGG
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Player connection [13588] Host "[IP] 192.168.1.119 [Port] 0 [Flags] 2 [Guid] 1661985733 [EditorId] 1661985733 [Version] 1048832 [Id] WindowsEditor(7,ÂÜ²·) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+
+Player connection [13588] Host "[IP] 192.168.1.119 [Port] 0 [Flags] 2 [Guid] 1661985733 [EditorId] 1661985733 [Version] 1048832 [Id] WindowsEditor(7,ÂÜ²·) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+
+AS: AutoStreaming module initializing.
+Refreshing native plugins compatible for Editor in 84.26 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2021.3.18f1c1 (93698379025b)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.3.18f1c1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path D:/GitRepo/PGG/Assets
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 3050 Laptop GPU (ID=0x25e2)
+    Vendor:   NVIDIA
+    VRAM:     3991 MB
+    Driver:   31.0.15.1661
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.3.18f1c1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.3.18f1c1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.3.18f1c1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56880
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.18f1c1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.18f1c1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.003914 seconds.
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 77.27 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.590 seconds
+Domain Reload Profiling:
+	ReloadAssembly (591ms)
+		BeginReloadAssembly (63ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (0ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (1ms)
+		EndReloadAssembly (432ms)
+			LoadAssemblies (61ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (103ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (29ms)
+			SetupLoadedEditorAssemblies (242ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (8ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (77ms)
+				BeforeProcessingInitializeOnLoad (1ms)
+				ProcessInitializeOnLoadAttributes (112ms)
+				ProcessInitializeOnLoadMethodAttributes (43ms)
+				AfterProcessingInitializeOnLoad (0ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (0ms)
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.004105 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image D:\GitRepo\PGG\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image D:\GitRepo\PGG\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.76 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.432 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1433ms)
+		BeginReloadAssembly (178ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (7ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (29ms)
+		EndReloadAssembly (1085ms)
+			LoadAssemblies (115ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (357ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (95ms)
+			SetupLoadedEditorAssemblies (467ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (13ms)
+				SetLoadedEditorAssemblies (2ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (108ms)
+				ProcessInitializeOnLoadAttributes (316ms)
+				ProcessInitializeOnLoadMethodAttributes (20ms)
+				AfterProcessingInitializeOnLoad (7ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (5ms)
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.07 seconds
+Refreshing native plugins compatible for Editor in 0.65 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3750 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 24 unused Assets / (113.8 KB). Loaded Objects now: 4212.
+Memory consumption went from 131.1 MB to 131.0 MB.
+Total: 3.671800 ms (FindLiveObjects: 0.299700 ms CreateObjectMapping: 0.267000 ms MarkObjects: 2.931700 ms  DeleteObjects: 0.171600 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.005364 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image D:\GitRepo\PGG\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image D:\GitRepo\PGG\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.67 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.982 seconds
+Domain Reload Profiling:
+	ReloadAssembly (984ms)
+		BeginReloadAssembly (198ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (9ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (69ms)
+		EndReloadAssembly (704ms)
+			LoadAssemblies (85ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (254ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (36ms)
+			SetupLoadedEditorAssemblies (308ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (12ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (56ms)
+				ProcessInitializeOnLoadAttributes (213ms)
+				ProcessInitializeOnLoadMethodAttributes (18ms)
+				AfterProcessingInitializeOnLoad (7ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (5ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 2.48 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3762 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 17 unused Assets / (80.4 KB). Loaded Objects now: 4234.
+Memory consumption went from 134.2 MB to 134.1 MB.
+Total: 3.598400 ms (FindLiveObjects: 0.426000 ms CreateObjectMapping: 0.075000 ms MarkObjects: 2.852500 ms  DeleteObjects: 0.243400 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.004028 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image D:\GitRepo\PGG\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image D:\GitRepo\PGG\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.48 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.859 seconds
+Domain Reload Profiling:
+	ReloadAssembly (860ms)
+		BeginReloadAssembly (115ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (4ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (30ms)
+		EndReloadAssembly (651ms)
+			LoadAssemblies (72ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (216ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (34ms)
+			SetupLoadedEditorAssemblies (298ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (11ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (53ms)
+				ProcessInitializeOnLoadAttributes (206ms)
+				ProcessInitializeOnLoadMethodAttributes (20ms)
+				AfterProcessingInitializeOnLoad (7ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (5ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 2.01 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3762 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 17 unused Assets / (80.4 KB). Loaded Objects now: 4237.
+Memory consumption went from 134.2 MB to 134.2 MB.
+Total: 2.251500 ms (FindLiveObjects: 0.191000 ms CreateObjectMapping: 0.100000 ms MarkObjects: 1.860700 ms  DeleteObjects: 0.098600 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.004048 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image D:\GitRepo\PGG\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image D:\GitRepo\PGG\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.67 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.905 seconds
+Domain Reload Profiling:
+	ReloadAssembly (905ms)
+		BeginReloadAssembly (125ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (5ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (34ms)
+		EndReloadAssembly (700ms)
+			LoadAssemblies (73ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (220ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (43ms)
+			SetupLoadedEditorAssemblies (319ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (15ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (62ms)
+				ProcessInitializeOnLoadAttributes (208ms)
+				ProcessInitializeOnLoadMethodAttributes (24ms)
+				AfterProcessingInitializeOnLoad (9ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (5ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 1.96 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3762 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 17 unused Assets / (80.4 KB). Loaded Objects now: 4240.
+Memory consumption went from 134.3 MB to 134.2 MB.
+Total: 2.287900 ms (FindLiveObjects: 0.195500 ms CreateObjectMapping: 0.093000 ms MarkObjects: 1.893300 ms  DeleteObjects: 0.104900 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003548 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image D:\GitRepo\PGG\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image D:\GitRepo\PGG\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.54 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.948 seconds
+Domain Reload Profiling:
+	ReloadAssembly (949ms)
+		BeginReloadAssembly (126ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (5ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (32ms)
+		EndReloadAssembly (735ms)
+			LoadAssemblies (72ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (240ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (44ms)
+			SetupLoadedEditorAssemblies (325ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (14ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (61ms)
+				ProcessInitializeOnLoadAttributes (213ms)
+				ProcessInitializeOnLoadMethodAttributes (25ms)
+				AfterProcessingInitializeOnLoad (11ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (6ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 2.03 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3762 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 17 unused Assets / (80.4 KB). Loaded Objects now: 4243.
+Memory consumption went from 134.3 MB to 134.2 MB.
+Total: 2.342700 ms (FindLiveObjects: 0.232900 ms CreateObjectMapping: 0.128400 ms MarkObjects: 1.893800 ms  DeleteObjects: 0.085800 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 148900.340484 seconds.
+  path: Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Prefabs - Demo - PGG/House Interior Prefabs/PR_HouseFloor-Optim1.prefab
+  artifactKey: Guid(e1a5009453f6cea40b98a2d18dc23ca1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Prefabs - Demo - PGG/House Interior Prefabs/PR_HouseFloor-Optim1.prefab using Guid(e1a5009453f6cea40b98a2d18dc23ca1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd96ba7b93726bf072290a3e71f1fd27f') in 0.868568 seconds 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.004708 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image D:\GitRepo\PGG\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image D:\GitRepo\PGG\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.65 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.027 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1030ms)
+		BeginReloadAssembly (273ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (13ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (120ms)
+		EndReloadAssembly (666ms)
+			LoadAssemblies (97ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (246ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (34ms)
+			SetupLoadedEditorAssemblies (274ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (18ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (53ms)
+				ProcessInitializeOnLoadAttributes (178ms)
+				ProcessInitializeOnLoadMethodAttributes (17ms)
+				AfterProcessingInitializeOnLoad (6ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (4ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 1.52 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3763 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 17 unused Assets / (80.4 KB). Loaded Objects now: 4255.
+Memory consumption went from 138.8 MB to 138.7 MB.
+Total: 3.189100 ms (FindLiveObjects: 0.198700 ms CreateObjectMapping: 0.110200 ms MarkObjects: 2.765000 ms  DeleteObjects: 0.114000 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 9651.472156 seconds.
+  path: Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Models - Demo - PGG/Large Tunnel V2 Models/FloorV3.fbx
+  artifactKey: Guid(b063d8d3825ac754180455e3bf106c0d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Models - Demo - PGG/Large Tunnel V2 Models/FloorV3.fbx using Guid(b063d8d3825ac754180455e3bf106c0d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2e1935314892bcee328bb770f4b92f72') in 0.898569 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 6.044584 seconds.
+  path: Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Models - Demo - PGG/House Interior Modules/HouseFloor-Optim.fbx
+  artifactKey: Guid(f196cbb69e357dc4982af9da481c9452) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Models - Demo - PGG/House Interior Modules/HouseFloor-Optim.fbx using Guid(f196cbb69e357dc4982af9da481c9452) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '952254dc9a26bd9f0a4ac3fdd69711b8') in 0.029340 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 745.724840 seconds.
+  path: Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Prefabs - Demo - PGG/Props Interior/BigCloset.prefab
+  artifactKey: Guid(62d3f8d785cab5c4ba203ce5bb3aa29c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Prefabs - Demo - PGG/Props Interior/BigCloset.prefab using Guid(62d3f8d785cab5c4ba203ce5bb3aa29c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2b07bfb0a298174f56db8772e5b68f89') in 0.199484 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000043 seconds.
+  path: Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Prefabs - Demo - PGG/Props Interior/Ruin3.prefab
+  artifactKey: Guid(5c85ba80f0b7cec478344c697b97eb80) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Prefabs - Demo - PGG/Props Interior/Ruin3.prefab using Guid(5c85ba80f0b7cec478344c697b97eb80) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2c169c8a4302154803442da5f8309485') in 0.047465 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000043 seconds.
+  path: Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Prefabs - Demo - PGG/Props Interior/MediumCloset.prefab
+  artifactKey: Guid(576c525bc0ae628448b9699458b5b4d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Prefabs - Demo - PGG/Props Interior/MediumCloset.prefab using Guid(576c525bc0ae628448b9699458b5b4d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2e1c9ee6aa67a6a94ad0695774924a86') in 0.032850 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000039 seconds.
+  path: Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Prefabs - Demo - PGG/Props Interior/Cardbox2.prefab
+  artifactKey: Guid(0bbbfa419fec361469fd6981cad71b73) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Prefabs - Demo - PGG/Props Interior/Cardbox2.prefab using Guid(0bbbfa419fec361469fd6981cad71b73) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '483bd34a9871066a4997638e866f8ff9') in 0.035138 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Prefabs - Demo - PGG/Props Interior/Cardbox1.prefab
+  artifactKey: Guid(28c4c743471bb3441814a862b1b6152a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Prefabs - Demo - PGG/Props Interior/Cardbox1.prefab using Guid(28c4c743471bb3441814a862b1b6152a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8e953fd9e2147d98027e6bc897d9b347') in 0.033333 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Prefabs - Demo - PGG/Props Interior/OtherBox1.prefab
+  artifactKey: Guid(a0abc14a18e82ad4c9b42c6d1e2f4860) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Prefabs - Demo - PGG/Props Interior/OtherBox1.prefab using Guid(a0abc14a18e82ad4c9b42c6d1e2f4860) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a4cb1cc7fe257d428b9a972d9492a446') in 0.036939 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Prefabs - Demo - PGG/Props Interior/WaterContainer.prefab
+  artifactKey: Guid(d6dee13c8e0f3144a9ba2cef834f92ed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Prefabs - Demo - PGG/Props Interior/WaterContainer.prefab using Guid(d6dee13c8e0f3144a9ba2cef834f92ed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd52536869c08e9bedd3fa51fdf68ddf5') in 0.315899 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 404.732095 seconds.
+  path: Assets/FImpossible Creations/Plugins - Level Design/PGG/Presets Directory/FS_Drafts/FS_NewFieldSetup1.asset
+  artifactKey: Guid(4a13eb73e6a743e4f94b6bd9386cb85f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FImpossible Creations/Plugins - Level Design/PGG/Presets Directory/FS_Drafts/FS_NewFieldSetup1.asset using Guid(4a13eb73e6a743e4f94b6bd9386cb85f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3072a60e9ce088a28be892fd133bf0a3') in 0.111348 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 2266.819783 seconds.
+  path: Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Models - Demo - PGG/Decors Models/BelowWallWallDebrisV2.fbx
+  artifactKey: Guid(9216af019fc7599459c2371ab0dcacb9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Models - Demo - PGG/Decors Models/BelowWallWallDebrisV2.fbx using Guid(9216af019fc7599459c2371ab0dcacb9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5aaa8570174612f3b2410ad05617bfa8') in 0.079944 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000041 seconds.
+  path: Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Prefabs - Demo - PGG/Exterior House Prefabs/DoorWall-Optim.prefab
+  artifactKey: Guid(ef325703a14a7c842ab9e1cdc5609891) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Prefabs - Demo - PGG/Exterior House Prefabs/DoorWall-Optim.prefab using Guid(ef325703a14a7c842ab9e1cdc5609891) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '825859e105832c0e0c103a837deaa38c') in 0.053009 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Models - Demo - PGG/Flat Building Models/FlatWallV2.fbx
+  artifactKey: Guid(39655622cb718d8408a778c737e5779b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Models - Demo - PGG/Flat Building Models/FlatWallV2.fbx using Guid(39655622cb718d8408a778c737e5779b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '996e15679a8f006bcd8842a67746d34c') in 0.084951 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000045 seconds.
+  path: Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Models - Demo - PGG/Flat Building Models/FlatBaseWallUpper.fbx
+  artifactKey: Guid(67370bbfca5a6024e9128ec20be28ff6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Models - Demo - PGG/Flat Building Models/FlatBaseWallUpper.fbx using Guid(67370bbfca5a6024e9128ec20be28ff6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7dab4781b22291e8a5264d5c9761349f') in 0.048360 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000037 seconds.
+  path: Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Models - Demo - PGG/Exterior House 2 Models/DoorWall.fbx
+  artifactKey: Guid(5fa44095656d32c45bb9dfea37737f44) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Models - Demo - PGG/Exterior House 2 Models/DoorWall.fbx using Guid(5fa44095656d32c45bb9dfea37737f44) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '038624bfabf2bc2909699b0e22bea57f') in 0.073687 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Models - Demo - PGG/Flat Building Models/FlatWallUpper-Windows.fbx
+  artifactKey: Guid(0ab6711d04ef4f945b0120cb70937b53) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Models - Demo - PGG/Flat Building Models/FlatWallUpper-Windows.fbx using Guid(0ab6711d04ef4f945b0120cb70937b53) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '17301c54030a0138f872ca57585052f4') in 0.059110 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000038 seconds.
+  path: Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Models - Demo - PGG/Exterior House Models/DoorWall-Optim.fbx
+  artifactKey: Guid(036af82fa45f3b645b1840f11d6a505e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Models - Demo - PGG/Exterior House Models/DoorWall-Optim.fbx using Guid(036af82fa45f3b645b1840f11d6a505e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '77156f860a9d4134d92d455485a223b0') in 0.028919 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Models - Demo - PGG/Flat Building Models/FlatBaseWall.fbx
+  artifactKey: Guid(a7d5c094bfd0d184fbab80dae896756c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Models - Demo - PGG/Flat Building Models/FlatBaseWall.fbx using Guid(a7d5c094bfd0d184fbab80dae896756c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0e619bfa57d0fd5899eca9eae4b14b03') in 0.052147 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Prefabs - Demo - PGG/Dungeon Game Prefabs/DungeonWallV1Hole Variant.prefab
+  artifactKey: Guid(19b5520426f4885408301564aa5e2016) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Prefabs - Demo - PGG/Dungeon Game Prefabs/DungeonWallV1Hole Variant.prefab using Guid(19b5520426f4885408301564aa5e2016) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5a48f6fc6faad897c9fcc0744a0775dd') in 0.061593 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Models - Demo - PGG/Flat Building Models/FlatBalconyWall.fbx
+  artifactKey: Guid(dc3e335e8c23f2241b822fe2167552fa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Models - Demo - PGG/Flat Building Models/FlatBalconyWall.fbx using Guid(dc3e335e8c23f2241b822fe2167552fa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ba2c92835dd330a79eb1a5d57a029a1e') in 0.065400 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000039 seconds.
+  path: Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Interior Demos/Field Setups/FieldSetup_InteriorRedBrick-Optimized.asset
+  artifactKey: Guid(366215a91b4e68546bbdad66d0c2d914) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Interior Demos/Field Setups/FieldSetup_InteriorRedBrick-Optimized.asset using Guid(366215a91b4e68546bbdad66d0c2d914) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '837cb10185b05232c2f0db191a8e2f01') in 0.124392 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000042 seconds.
+  path: Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Interior Demos/Field Setups/FS_InteriorFullOfPropsV2.asset
+  artifactKey: Guid(f828620980da6014490ae72030ab8ba3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Interior Demos/Field Setups/FS_InteriorFullOfPropsV2.asset using Guid(f828620980da6014490ae72030ab8ba3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '880fb1a3311c0d45261575aeb13d3ed1') in 0.372866 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000070 seconds.
+  path: Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Exterior Demos/City Or Single Elements/FS_MedievalWall.asset
+  artifactKey: Guid(8d83f60386c45644abbdfe60d5a21919) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Exterior Demos/City Or Single Elements/FS_MedievalWall.asset using Guid(8d83f60386c45644abbdfe60d5a21919) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a264acfcca0049736cd7bf35223e7f0b') in 0.115255 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000067 seconds.
+  path: Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Models - Demo - PGG/Dungeon Game Models/DungeonWallV2.fbx
+  artifactKey: Guid(1c65a72048b68d543bf28ca79ce1bc4d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Models - Demo - PGG/Dungeon Game Models/DungeonWallV2.fbx using Guid(1c65a72048b68d543bf28ca79ce1bc4d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dc051733077f928b9ac1dcd6c033d2f3') in 0.052058 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Models - Demo - PGG/Garage/GarageWall-FrontCeil.fbx
+  artifactKey: Guid(c5703c63187116c4984ee4cd3f415138) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Models - Demo - PGG/Garage/GarageWall-FrontCeil.fbx using Guid(c5703c63187116c4984ee4cd3f415138) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '93d18bc306654fc5b9b5cfdecdb62a62') in 0.055246 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Models - Demo - PGG/Dungeon Game Models/DungeonWall.fbx
+  artifactKey: Guid(0fa7ca51b5677db40866a02732f9ebce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Models - Demo - PGG/Dungeon Game Models/DungeonWall.fbx using Guid(0fa7ca51b5677db40866a02732f9ebce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '033789e2aaafbf0419f6eb93f41c538c') in 0.038026 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Dungeon Game Demo (will be deprecated)/Field Setups/FS_DungeonBossRoom.asset
+  artifactKey: Guid(775521f8d1036754caa8397c0338b9d0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Dungeon Game Demo (will be deprecated)/Field Setups/FS_DungeonBossRoom.asset using Guid(775521f8d1036754caa8397c0338b9d0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4964b423d03e88a659240bdf9dc71219') in 0.066321 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000035 seconds.
+  path: Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Materials - Demo - PGG/MAT_MedievalWalls.mat
+  artifactKey: Guid(6be47b807071a584d82cefee71d2784e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Materials - Demo - PGG/MAT_MedievalWalls.mat using Guid(6be47b807071a584d82cefee71d2784e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '75f21ee495f6916e655cdf8dc41eef23') in 0.023512 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000043 seconds.
+  path: Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Models - Demo - PGG/Garage/GarageWall-Base.fbx
+  artifactKey: Guid(57d0cb2bd12322d4c9e9261e84dcb914) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Models - Demo - PGG/Garage/GarageWall-Base.fbx using Guid(57d0cb2bd12322d4c9e9261e84dcb914) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f28147c3fbbe1ef64257cb0f523a3d04') in 0.050742 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Models - Demo - PGG/House Interior Modules/DoorWall-InteriorOptim.fbx
+  artifactKey: Guid(dc4ae294cc271284c9e4e23bac27b922) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Models - Demo - PGG/House Interior Modules/DoorWall-InteriorOptim.fbx using Guid(dc4ae294cc271284c9e4e23bac27b922) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ce086e03f83bb5a896f060ca77bea8f0') in 0.033903 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Interior Demos/Mod Packs/ModPack_Props1_ForScaled.asset
+  artifactKey: Guid(78c0ad2e9ed5ecf40bf8aa75c136792a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Interior Demos/Mod Packs/ModPack_Props1_ForScaled.asset using Guid(78c0ad2e9ed5ecf40bf8aa75c136792a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5d94f3f2e70c0e64f4f99587f8ca57d9') in 0.171568 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Generators Demos/Field Setups/FS_InteriorWalls-OverridableWallMats.asset
+  artifactKey: Guid(3b9396927c4e8b945905e3a551528e3e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Generators Demos/Field Setups/FS_InteriorWalls-OverridableWallMats.asset using Guid(3b9396927c4e8b945905e3a551528e3e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0f92d119c502ca7482235893dfd5c218') in 0.062768 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000080 seconds.
+  path: Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Work In Progress/Field Setups/FS_BasicRoomSetup.asset
+  artifactKey: Guid(682ccdc1f19d73542bfc826dc6b3dc4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Work In Progress/Field Setups/FS_BasicRoomSetup.asset using Guid(682ccdc1f19d73542bfc826dc6b3dc4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2b6c35160434617b237c2fb49a1ac36d') in 0.052467 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Materials - Demo - PGG/MAT_FlatWallsV1.mat
+  artifactKey: Guid(3dac061d40e7ff54697b86114639324e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Materials - Demo - PGG/MAT_FlatWallsV1.mat using Guid(3dac061d40e7ff54697b86114639324e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5245abf2385713f061e54b25c0370ab5') in 0.016831 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Generators Demos/Field Setups/FS_FlatBuildingInteriorRoomV2.asset
+  artifactKey: Guid(80171e96ca9f1c44fa9836d8a53d406f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Generators Demos/Field Setups/FS_FlatBuildingInteriorRoomV2.asset using Guid(80171e96ca9f1c44fa9836d8a53d406f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '10c664ed7d3f71379b9a41abc0b31627') in 0.107930 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000033 seconds.
+  path: Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Interior Demos/Field Setups/FS_WallConnector.asset
+  artifactKey: Guid(851dc79f4f11d0b428ea44f7b5e0b97a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Interior Demos/Field Setups/FS_WallConnector.asset using Guid(851dc79f4f11d0b428ea44f7b5e0b97a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9ad436659b2a4c931687f78d63841361') in 0.053249 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000037 seconds.
+  path: Assets/FImpossible Creations/Shared Tools/Editor/Resources/Fimp/Misc Icons/FWait.png
+  artifactKey: Guid(526933e8fa749ed44aba6b8220ca7bbd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FImpossible Creations/Shared Tools/Editor/Resources/Fimp/Misc Icons/FWait.png using Guid(526933e8fa749ed44aba6b8220ca7bbd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd54b0a17de21097dca4550196db53718') in 0.058002 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000080 seconds.
+  path: Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Models - Demo - PGG/Flat Building Models/FlatWallV1.fbx
+  artifactKey: Guid(a7aa3e709b0b4844c8c5bc65b43d5428) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Models - Demo - PGG/Flat Building Models/FlatWallV1.fbx using Guid(a7aa3e709b0b4844c8c5bc65b43d5428) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bd67f86f58b2ba25c10dccec6eed51b8') in 0.055550 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Generators Demos/Field Setups/FS_FlatBuildingInteriorRoomV3.asset
+  artifactKey: Guid(d7e7267f3a61e6145aaff38952fdf100) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Generators Demos/Field Setups/FS_FlatBuildingInteriorRoomV3.asset using Guid(d7e7267f3a61e6145aaff38952fdf100) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '068cd6ff4a25432cf7f767d38ce478fb') in 0.060669 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Interior Demos/Field Setups/FS_DoubleSizeGridTunnel.asset
+  artifactKey: Guid(5de3932d47274f04ead2af96260e9521) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Interior Demos/Field Setups/FS_DoubleSizeGridTunnel.asset using Guid(5de3932d47274f04ead2af96260e9521) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '65733cd2bf73703fdcde56e26867efc0') in 0.079603 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Materials - Demo - PGG/MAT_FlatWallsV2.mat
+  artifactKey: Guid(e3f222f85815c9349a6f88e391f97377) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Materials - Demo - PGG/MAT_FlatWallsV2.mat using Guid(e3f222f85815c9349a6f88e391f97377) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9890e6f6710d5ed1e08e977256b08a88') in 0.024353 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000044 seconds.
+  path: Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Generators Demos/Field Setups/FS_FlatNullCorridor.asset
+  artifactKey: Guid(4b1b277a6b1f99649be0406739e5f8bb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Generators Demos/Field Setups/FS_FlatNullCorridor.asset using Guid(4b1b277a6b1f99649be0406739e5f8bb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '253f10f8cd2b12eabaaef3ff48cd7806') in 0.042437 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000033 seconds.
+  path: Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Prefabs - Demo - PGG/Dungeon Game Prefabs/DungeonWallV2.prefab
+  artifactKey: Guid(1b6c575ee9e0b114aa92ae26da11db04) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Demos Assets/Prefabs - Demo - PGG/Dungeon Game Prefabs/DungeonWallV2.prefab using Guid(1b6c575ee9e0b114aa92ae26da11db04) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '784dc464a21a3482e5b4bf945f578717') in 0.021758 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.383169 seconds.
+  path: Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Interior Demos/Field Setups/FS_StairsExample.asset
+  artifactKey: Guid(45979a14388343f4687737a540d1f4e6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FImpossible Creations/Plugins - Level Design/PGG/Demos - PGG/Interior Demos/Field Setups/FS_StairsExample.asset using Guid(45979a14388343f4687737a540d1f4e6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8960a8512985164b23e017f97c19ba2f') in 0.071800 seconds 
+Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
+AssetImportWorker is now disconnected from the server
+Process exiting
+Exiting without the bug reporter. Application will terminate with return code 0
