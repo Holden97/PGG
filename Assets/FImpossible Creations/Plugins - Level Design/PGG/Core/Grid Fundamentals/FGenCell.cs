@@ -16,7 +16,7 @@ namespace FIMSpace.Generating
         /// <summary>
         /// 生成的笔刷id
         /// </summary>
-        public int generateSlotId = -1;
+        public int brushSlotId = -1;
         public int Scaler = 1;
 
         [System.NonSerialized] public Vector3 HelperVector = Vector3.zero;

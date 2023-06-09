@@ -97,6 +97,7 @@ namespace FIMSpace.Generating
         public List<PainterCell> GetAllPainterCells { get { return cellsMemory; } }
 
         [Space(3)]
+        [HideInInspector]
         public FieldSetup FieldPreset;
         [Space(3)]
         public List<FieldSetup> FieldPresets;
@@ -321,19 +322,25 @@ namespace FIMSpace.Generating
             FieldVariablesBackup();
             FieldVariablesSetCustom();
 
-            try
+            //在这里分裂grid并尝试生成。
+            var res = SplitGrid(grid);
+            foreach (var item in res)
             {
-                Generated.Add(IGeneration.GenerateFieldObjects(generatingSetup, grid, transform, true, guides, null, true));
-                if (myInjections != null) if (myInjections.Count > 0) generatingSetup.ClearTemporaryInjections();
-                FieldVariablesRestore();
+                try
+                {
+                    Generated.Add(IGeneration.GenerateFieldObjects(FieldPresets[item.Key - 10000], item.Value, transform, true, guides, null, true));
+                    if (myInjections != null) if (myInjections.Count > 0) generatingSetup.ClearTemporaryInjections();
+                    FieldVariablesRestore();
+                }
+                catch (Exception exc)
+                {
+                    UnityEngine.Debug.LogError("[PGG] Error when generating with GridPainter! Check the Log down below.");
+                    UnityEngine.Debug.LogException(exc);
+                    if (myInjections != null) if (myInjections.Count > 0) generatingSetup.ClearTemporaryInjections();
+                    FieldVariablesRestore();
+                }
             }
-            catch (System.Exception exc)
-            {
-                UnityEngine.Debug.LogError("[PGG] Error when generating with GridPainter! Check the Log down below.");
-                UnityEngine.Debug.LogException(exc);
-                if (myInjections != null) if (myInjections.Count > 0) generatingSetup.ClearTemporaryInjections();
-                FieldVariablesRestore();
-            }
+
 
             if (AdditionalFieldSetups != null)
                 for (int i = 0; i < AdditionalFieldSetups.Count; i++)
@@ -429,6 +436,25 @@ namespace FIMSpace.Generating
 #endif
         }
 
+        private Dictionary<int, FGenGraph<FieldCell, FGenPoint>> SplitGrid(FGenGraph<FieldCell, FGenPoint> grid)
+        {
+            var result = new Dictionary<int, FGenGraph<FieldCell, FGenPoint>>();
+            foreach (var item in grid.AllCells)
+            {
+                if (!result.ContainsKey(item.brushSlotId))
+                {
+                    var cur = new FGenGraph<FieldCell, FGenPoint>();
+                    result.Add(item.brushSlotId, cur);
+                    cur.AddCell(item.Pos, item.brushSlotId);
+                }
+                else
+                {
+                    result[item.brushSlotId].AddCell(item.Pos, item.brushSlotId);
+                }
+            }
+            return result;
+        }
+
 
 #if UNITY_EDITOR
 
@@ -463,7 +489,7 @@ namespace FIMSpace.Generating
                         {
                             Gizmos.DrawWireCube(genPosition, new Vector3(cSize.x, cSize.y * 0.2f, cSize.z));
                             Handles.Label(genPosition, $"({cell.Pos.x},{cell.Pos.z})");
-                            Handles.Label(genPosition - Vector3.right * 0.5f, $"笔刷槽位Id:({cell.generateSlotId-10000})");
+                            Handles.Label(genPosition - Vector3.right * 0.5f, $"笔刷槽位Id:({cell.brushSlotId - 10000})");
                             if (cell.IsGhostCell) Gizmos.DrawCube(genPosition, new Vector3(cSize.x * 0.8f, cSize.y * 0.2f, cSize.z * 0.8f));
                         }
 
@@ -629,7 +655,7 @@ namespace FIMSpace.Generating
                 pCell.pos = cell.Pos;
                 pCell.rot = Quaternion.identity;
                 pCell.inGrid = cell.InTargetGridArea;
-                pCell.brushSlotId = cell.generateSlotId;
+                pCell.brushSlotId = cell.brushSlotId;
                 cell.GridPainter_AssignDataTo(ref pCell);
                 //pCell.Instructions = cell.GetInstructions();
                 cellsMemory.Add(pCell);

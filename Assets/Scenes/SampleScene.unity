@@ -301,3 +301,128 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1099532160
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1099532162}
+  - component: {fileID: 1099532161}
+  m_Layer: 0
+  m_Name: Grid Painter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1099532161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1099532160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 470749bf3e3c51047ad0cdc8c752e68a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GenerateOnStart: 1
+  AutoRefresh: 0
+  Seed: 0
+  RandomSeed: 1
+  Generated: []
+  RunAfterGenerating:
+    m_PersistentCalls:
+      m_Calls: []
+  UseOutlineFill: 0
+  OutlineFill:
+    Thickness: 1
+    Mode: 0
+    ToRun: 0
+    FieldSetup: {fileID: 0}
+    Mod: {fileID: 0}
+    ModPack: {fileID: 0}
+    CommandName: Field Outline Command Name
+  UseRectangleFill: 0
+  RectangleFill:
+    Center: {x: 0, y: 0}
+    Size: {x: 8, y: 8}
+    ToRun: 0
+    FieldSetup: {fileID: 0}
+    Mod: {fileID: 0}
+    ModPack: {fileID: 0}
+  _Editor_drawAdd: 0
+  cellsMemory: []
+  PaintingID: -1
+  FieldPreset: {fileID: 11400000, guid: e162a06f18f657e47bfef0ed458a62ea, type: 2}
+  FieldPresets:
+  - {fileID: 11400000, guid: e162a06f18f657e47bfef0ed458a62ea, type: 2}
+  - {fileID: 11400000, guid: c5077798ee465af4cb6aa1f9da9148ff, type: 2}
+  AdditionalFieldSetups: []
+  Injections: []
+  CellsInstructions: []
+  AcquireCellDataFrom: []
+  AddCellsOnInstructions: 0
+  AllowOverlapInstructions: 0
+  Debug: 1
+  Transprent: 1
+  ignoredPacksForGenerating: []
+  ignoredForGenerating: []
+  SwitchVariables: []
+  SwitchPackVariables: []
+  _EditorGUI_DrawExtra: 0
+  _EditorGUI_DrawIgnoring: 0
+  _EditorGUI_DrawVars: 0
+  _EditorGUI_DrawPackVars: 0
+  _ModifyVars: 0
+  _ModifyPackVars: 0
+  _EditorGUI_SelectedId: -1
+  _Editor_Paint: 0
+  _Editor_RadiusY: 1
+  _Editor_PaintRadius: 1
+  _Editor_YLevel: 0
+  _Editor_CommandsPage: 0
+  _Editor_PaintSpaceMode: 0
+  _Editor_Instruction: 0
+  _Editor_RotOrMovTool: 0
+  _Editor_ContinousMode: 0
+  Composition:
+    UseComposition: 0
+    Owner: {fileID: 0}
+    OverrideEnabled: 0
+    Prepared: 0
+    Setup: {fileID: 0}
+    Injections: []
+    GenType: 1
+    JustModPack: {fileID: 0}
+    JustMod: {fileID: 0}
+    OtherPlanner: {fileID: 0}
+    subSetup: {fileID: 0}
+    FieldSetupVariablesOverrides: []
+    FieldPackagesOverrides: []
+    UtilityModsOverrides: []
+    OverrideCellSize: 0
+    OverridingCellSize: {x: 1, y: 1, z: 1}
+    ParentFieldPlanner: {fileID: 0}
+    PlannerVariablesOverrides: []
+    InitShapes: []
+    Instances: 1
+--- !u!4 &1099532162
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1099532160}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 16.409172, y: 0.9833913, z: -23.576862}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

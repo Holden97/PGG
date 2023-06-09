@@ -188,7 +188,7 @@ namespace FIMSpace.Generating
                 cell = GetCell(x, y, z, true);
                 //标记已需要绘制网格
                 cell.InTargetGridArea = true;
-                cell.generateSlotId = brushSlotId;
+                cell.brushSlotId = brushSlotId;
                 cell.Scaler = ReferenceScale;
                 AllApprovedCells.Add(cell);
                 CheckForMinMax(cell);
