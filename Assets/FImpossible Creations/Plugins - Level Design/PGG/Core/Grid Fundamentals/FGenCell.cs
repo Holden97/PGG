@@ -174,6 +174,14 @@ namespace FIMSpace.Generating
             this.brushSlotId.Add(brushSlotId);
         }
 
+        public void RemoveBrushId(int brushSlotId)
+        {
+            if (this.brushSlotId.Contains(brushSlotId))
+            {
+                this.brushSlotId.Remove(brushSlotId);
+            }
+        }
+
         public void AddBrushId(List<int> brushSlotId)
         {
             foreach (var item in brushSlotId)

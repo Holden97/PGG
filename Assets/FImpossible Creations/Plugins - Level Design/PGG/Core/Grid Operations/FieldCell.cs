@@ -62,10 +62,10 @@ namespace FIMSpace.Generating
             }
             for (int i = 0; i < brushSlotId.Count - 1; i++)
             {
-                stringbuilder.Append(brushSlotId[i]);
+                stringbuilder.Append(brushSlotId[i] - 10000);
                 stringbuilder.Append(",");
             }
-            stringbuilder.Append(brushSlotId[brushSlotId.Count-1]);
+            stringbuilder.Append(brushSlotId[brushSlotId.Count - 1] - 10000);
             return stringbuilder.ToString();
         }
 

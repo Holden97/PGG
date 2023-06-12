@@ -182,14 +182,15 @@ namespace FIMSpace.Generating
         public T1 AddCell(int x, int y, int z, int brushSlotId = -1)
         {
             T1 cell = GetCell(x, y, z, false);
+            cell?.AddBrushId(brushSlotId);
 
             if (FGenerators.CheckIfIsNull((cell)) || cell.InTargetGridArea == false)
             {
                 cell = GetCell(x, y, z, true);
                 //标记已需要绘制网格
                 cell.InTargetGridArea = true;
-                cell.AddBrushId(brushSlotId);
                 cell.Scaler = ReferenceScale;
+                cell.AddBrushId(brushSlotId);
                 AllApprovedCells.Add(cell);
                 CheckForMinMax(cell);
             }

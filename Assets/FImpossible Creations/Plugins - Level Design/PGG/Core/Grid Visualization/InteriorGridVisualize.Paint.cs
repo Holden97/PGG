@@ -95,13 +95,20 @@ namespace FIMSpace.Generating
             else
             if (erase == false)
             {
-                return grid.AddCell(gridPos,brushId);
+                return grid.AddCell(gridPos, brushId);
             }
             else
             {
                 var cell = grid.GetCell(gridPos);
-                cell.InTargetGridArea = false;
-                if (grid.AllApprovedCells.Contains(cell)) grid.AllApprovedCells.Remove(cell);
+                if (grid.AllApprovedCells.Contains(cell))
+                {
+                    cell.RemoveBrushId(brushId);
+                    if (cell.brushSlotId.Count == 0)
+                    {
+                        cell.InTargetGridArea = false;
+                        grid.AllApprovedCells.Remove(cell);
+                    }
+                }
                 return cell;
             }
         }

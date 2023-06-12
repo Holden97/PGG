@@ -491,7 +491,7 @@ namespace FIMSpace.Generating
                         {
                             Gizmos.DrawWireCube(genPosition, new Vector3(cSize.x, cSize.y * 0.2f, cSize.z));
                             Handles.Label(genPosition, $"({cell.Pos.x},{cell.Pos.z})");
-                            Handles.Label(genPosition - Vector3.right * 0.5f, $"Brush:({cell.BrushSlotToString()})");
+                            Handles.Label(genPosition - Vector3.up * 0.5f, $"Brush:({cell.BrushSlotToString()})");
                             if (cell.IsGhostCell) Gizmos.DrawCube(genPosition, new Vector3(cSize.x * 0.8f, cSize.y * 0.2f, cSize.z * 0.8f));
                         }
 
@@ -1293,6 +1293,11 @@ namespace FIMSpace.Generating
             if (Selection.activeGameObject != Current.gameObject) return;
             if (Current.FieldPresets == null || Current.FieldPresets.Count == 0) return;
 
+            foreach (var item in Current.FieldPresets)
+            {
+                if (item == null) return;
+            }
+
             Current.FieldPreset = Current.FieldPresets[0];
             if (Current.FieldPreset == null) return;
             Undo.RecordObject(Current, "PGGGridP");
@@ -1640,10 +1645,6 @@ namespace FIMSpace.Generating
             Color preC = GUI.backgroundColor;
 
             if (Current.PaintingID == -1) GUI.backgroundColor = Color.green;
-            if (GUI.Button(bRect, "Paint Cells "))
-            {
-                Current.PaintingID = -1;
-            }
 
             bRect.position += new Vector2(0, bRect.size.y + 2);
             for (int i = 0; i < Current.FieldPresets.Count; i++)
