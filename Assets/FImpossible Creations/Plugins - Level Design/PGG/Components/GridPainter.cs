@@ -96,7 +96,6 @@ namespace FIMSpace.Generating
 
         public List<PainterCell> GetAllPainterCells { get { return cellsMemory; } }
 
-        [Space(3)]
         [HideInInspector]
         public FieldSetup FieldPreset;
         [Space(3)]
@@ -441,15 +440,18 @@ namespace FIMSpace.Generating
             var result = new Dictionary<int, FGenGraph<FieldCell, FGenPoint>>();
             foreach (var item in grid.AllCells)
             {
-                if (!result.ContainsKey(item.brushSlotId))
+                foreach (var burshId in item.brushSlotId)
                 {
-                    var cur = new FGenGraph<FieldCell, FGenPoint>();
-                    result.Add(item.brushSlotId, cur);
-                    cur.AddCell(item.Pos, item.brushSlotId);
-                }
-                else
-                {
-                    result[item.brushSlotId].AddCell(item.Pos, item.brushSlotId);
+                    if (!result.ContainsKey(burshId))
+                    {
+                        var cur = new FGenGraph<FieldCell, FGenPoint>();
+                        result.Add(burshId, cur);
+                        cur.AddCell(item.Pos, burshId);
+                    }
+                    else
+                    {
+                        result[burshId].AddCell(item.Pos, burshId);
+                    }
                 }
             }
             return result;
@@ -478,7 +480,7 @@ namespace FIMSpace.Generating
             if (Debug != EDebug.None)
                 for (int i = 0; i < grid.AllApprovedCells.Count; i++)
                 {
-                    var cell = grid.AllApprovedCells[i];
+                    FieldCell cell = grid.AllApprovedCells[i];
                     Vector3 genPosition = cell.WorldPos(cSize);
 
                     if ((!is2D && cell.Pos.y == _Editor_YLevel) || (is2D && cell.Pos.z == _Editor_YLevel))
@@ -489,7 +491,7 @@ namespace FIMSpace.Generating
                         {
                             Gizmos.DrawWireCube(genPosition, new Vector3(cSize.x, cSize.y * 0.2f, cSize.z));
                             Handles.Label(genPosition, $"({cell.Pos.x},{cell.Pos.z})");
-                            Handles.Label(genPosition - Vector3.right * 0.5f, $"笔刷槽位Id:({cell.brushSlotId - 10000})");
+                            Handles.Label(genPosition - Vector3.right * 0.5f, $"Brush:({cell.BrushSlotToString()})");
                             if (cell.IsGhostCell) Gizmos.DrawCube(genPosition, new Vector3(cSize.x * 0.8f, cSize.y * 0.2f, cSize.z * 0.8f));
                         }
 
@@ -702,7 +704,7 @@ namespace FIMSpace.Generating
             /// <summary>
             /// 生成的笔刷id
             /// </summary>
-            public int brushSlotId;
+            public List<int> brushSlotId;
 
             public List<InstructionDefinition> Instructions;
 
@@ -1289,8 +1291,10 @@ namespace FIMSpace.Generating
             if (SceneView.currentDrawingSceneView == null) return;
             if (SceneView.currentDrawingSceneView.camera == null) return;
             if (Selection.activeGameObject != Current.gameObject) return;
-            if (Current.FieldPreset == null) return;
+            if (Current.FieldPresets == null || Current.FieldPresets.Count == 0) return;
 
+            Current.FieldPreset = Current.FieldPresets[0];
+            if (Current.FieldPreset == null) return;
             Undo.RecordObject(Current, "PGGGridP");
 
             Vector3 cSize = Current.FieldPreset.GetCellUnitSize();

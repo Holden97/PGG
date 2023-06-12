@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 namespace FIMSpace.Generating
@@ -15,7 +16,7 @@ namespace FIMSpace.Generating
         /// <summary> If cell is occupied also by other cell (on same grid scale level) </summary>
         [NonSerialized] public FieldCell ParentCell = null;
         public Vector3Int ParentCellPos;
-        [SerializeField][HideInInspector] public bool haveParentCell = false;
+        [SerializeField] [HideInInspector] public bool haveParentCell = false;
         /// <summary> If cell is occupying other cells, they're saved here (on same grid scale level) </summary>
         [NonSerialized] public List<FieldCell> ChildCells;
         public List<Vector3Int> ChildCellsPos;
@@ -50,6 +51,22 @@ namespace FIMSpace.Generating
 
             //cpy.cellCustomObjects = cellCustomObjects;
             return cpy;
+        }
+
+        public string BrushSlotToString()
+        {
+            var stringbuilder = new StringBuilder();
+            if (brushSlotId.Count == 0)
+            {
+                return null;
+            }
+            for (int i = 0; i < brushSlotId.Count - 1; i++)
+            {
+                stringbuilder.Append(brushSlotId[i]);
+                stringbuilder.Append(",");
+            }
+            stringbuilder.Append(brushSlotId[brushSlotId.Count-1]);
+            return stringbuilder.ToString();
         }
 
 

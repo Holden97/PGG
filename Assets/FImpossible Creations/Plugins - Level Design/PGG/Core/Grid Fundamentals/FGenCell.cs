@@ -16,7 +16,7 @@ namespace FIMSpace.Generating
         /// <summary>
         /// 生成的笔刷id
         /// </summary>
-        public int brushSlotId = -1;
+        public List<int> brushSlotId = new List<int>();
         public int Scaler = 1;
 
         [System.NonSerialized] public Vector3 HelperVector = Vector3.zero;
@@ -165,5 +165,25 @@ namespace FIMSpace.Generating
 
         #endregion
 
+        public void AddBrushId(int brushSlotId)
+        {
+            if (this.brushSlotId.Contains(brushSlotId))
+            {
+                return;
+            }
+            this.brushSlotId.Add(brushSlotId);
+        }
+
+        public void AddBrushId(List<int> brushSlotId)
+        {
+            foreach (var item in brushSlotId)
+            {
+                if (this.brushSlotId.Contains(item))
+                {
+                    continue;
+                }
+                this.brushSlotId.Add(item);
+            }
+        }
     }
 }
