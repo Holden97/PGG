@@ -327,6 +327,7 @@ namespace FIMSpace.Generating
             {
                 try
                 {
+                    if (item.Key - 10000 < 0 || item.Key - 10000 >= FieldPresets.Count) continue;
                     Generated.Add(IGeneration.GenerateFieldObjects(FieldPresets[item.Key - 10000], item.Value, transform, true, guides, null, true));
                     if (myInjections != null) if (myInjections.Count > 0) generatingSetup.ClearTemporaryInjections();
                     FieldVariablesRestore();
